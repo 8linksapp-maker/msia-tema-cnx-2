@@ -37,6 +37,7 @@ export default function ServicesManager() {
     const [tempActive, setTempActive] = useState(true);
     const [includeFaq, setIncludeFaq] = useState(true);
     const [generating, setGenerating] = useState(false);
+    const [showOutline, setShowOutline] = useState(false);
     const [modalError, setModalError] = useState('');
 
     useEffect(() => {
@@ -73,7 +74,7 @@ export default function ServicesManager() {
     const openCreate = () => {
         setTempTitle(''); setTempSlug(''); setTempShort(''); setTempIcon('');
         setTempColor(DEFAULT_COLOR); setTempImage(''); setTempNiche('');
-        setTempOutline([]); setTempContent(''); setTempGenAt(''); setTempActive(true); setIncludeFaq(true);
+        setTempOutline([]); setTempContent(''); setTempGenAt(''); setTempActive(true); setIncludeFaq(true); setShowOutline(false);
         setSlugTouched(false); setEditingIndex(null); setModalError('');
         setIsModalOpen(true);
     };
@@ -83,7 +84,7 @@ export default function ServicesManager() {
         setTempIcon(s.icon || ''); setTempColor(effectiveColor(s)); setTempImage(s.image || '');
         setTempNiche(s.niche || ''); setTempOutline(s.outline ? [...s.outline] : []);
         setTempContent(s.generatedContent || ''); setTempGenAt(s.contentGeneratedAt || '');
-        setTempActive(s.active !== false);
+        setTempActive(s.active !== false); setShowOutline((s.outline?.length ?? 0) > 0);
         setSlugTouched(true); setEditingIndex(idx); setModalError('');
         setIsModalOpen(true);
     };
@@ -288,47 +289,66 @@ export default function ServicesManager() {
                                 <input id="svc-short" type="text" value={tempShort} onChange={e => setTempShort(e.target.value)} className="w-full bg-elev border border-border rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-primary/30 outline-none" placeholder="Andaimes metálicos para obras e fachadas" />
                             </div>
 
-                            {/* Outline */}
-                            <div>
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-[10px] font-bold text-ink-muted uppercase tracking-widest">Estrutura do texto</span>
-                                    <button type="button" onClick={addOutline} className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"><Plus className="w-3 h-3" aria-hidden="true" /> Adicionar seção</button>
+                            {/* TEXTO — a IA escreve (primeiro plano); outline é opcional/escondido */}
+                            <div className="rounded-lg border border-primary/30 bg-primary-soft/40 p-4">
+                                <div className="flex items-start gap-3">
+                                    <span className="shrink-0 w-9 h-9 rounded-full bg-primary text-surface flex items-center justify-center" aria-hidden="true"><Sparkles className="w-4 h-4" /></span>
+                                    <div className="min-w-0">
+                                        <h4 className="font-semibold text-ink">O texto da página é a IA que escreve</h4>
+                                        <p className="text-sm text-ink-muted mt-0.5">Você só dá o nome do serviço. A inteligência escreve a página completa — e você ajusta depois, se quiser.</p>
+                                    </div>
                                 </div>
-                                {tempOutline.length === 0 ? (
-                                    <p className="text-xs text-ink-faint bg-elev rounded-md px-4 py-3">Sem seções. A IA usa uma estrutura padrão, ou adicione as suas.</p>
-                                ) : (
-                                    <div className="space-y-2">
-                                        {tempOutline.map((o, i) => (
-                                            <div key={i} className="flex items-center gap-2">
-                                                <select value={o.level} onChange={e => updateOutline(i, { level: e.target.value as OutlineItem['level'] })} className="bg-elev border border-border rounded px-2 py-2 text-xs font-mono uppercase focus:ring-2 focus:ring-primary/30 outline-none" aria-label={`Nível da seção ${i + 1}`}>
-                                                    {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
-                                                </select>
-                                                <input type="text" value={o.text} onChange={e => updateOutline(i, { text: e.target.value })} className="flex-1 bg-elev border border-border rounded px-3 py-2 text-sm focus:ring-2 focus:ring-primary/30 outline-none" placeholder="Título da seção" aria-label={`Texto da seção ${i + 1}`} />
-                                                <button type="button" onClick={() => moveOutline(i, -1)} disabled={i === 0} className="p-1.5 text-ink-faint hover:text-ink disabled:opacity-30" aria-label="Mover para cima"><ArrowUp className="w-4 h-4" aria-hidden="true" /></button>
-                                                <button type="button" onClick={() => moveOutline(i, 1)} disabled={i === tempOutline.length - 1} className="p-1.5 text-ink-faint hover:text-ink disabled:opacity-30" aria-label="Mover para baixo"><ArrowDown className="w-4 h-4" aria-hidden="true" /></button>
-                                                <button type="button" onClick={() => removeOutline(i)} className="p-1.5 text-ink-faint hover:text-red-600" aria-label="Remover seção"><Trash2 className="w-4 h-4" aria-hidden="true" /></button>
+                                <div className="flex flex-wrap items-center gap-3 mt-4">
+                                    <button type="button" onClick={generateWithAI} disabled={generating}
+                                        className="bg-primary hover:brightness-90 disabled:opacity-50 text-surface px-5 py-2.5 min-h-[44px] rounded font-semibold flex items-center gap-2 transition-all">
+                                        {generating ? <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" /> : <Sparkles className="w-4 h-4" aria-hidden="true" />}
+                                        {generating ? 'Gerando…' : (tempContent ? 'Gerar de novo' : 'Gerar texto com IA')}
+                                    </button>
+                                    <label className="flex items-center gap-1.5 text-xs text-ink-muted cursor-pointer">
+                                        <input type="checkbox" checked={includeFaq} onChange={e => setIncludeFaq(e.target.checked)} className="w-3.5 h-3.5 accent-primary" /> incluir perguntas frequentes
+                                    </label>
+                                    <button type="button" onClick={() => setShowOutline(v => !v)} className="text-xs font-semibold text-ink-muted hover:text-ink underline ml-auto">
+                                        {showOutline ? 'Esconder tópicos' : 'Orientar a IA (opcional)'}
+                                    </button>
+                                </div>
+
+                                {showOutline && (
+                                    <div className="mt-4 pt-4 border-t border-primary/20">
+                                        <div className="flex items-center justify-between gap-3 mb-2">
+                                            <p className="text-xs text-ink-muted">Quer dizer quais tópicos a IA deve cobrir? Sem isso, ela usa uma estrutura padrão boa.</p>
+                                            <button type="button" onClick={addOutline} className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 shrink-0"><Plus className="w-3 h-3" aria-hidden="true" /> Tópico</button>
+                                        </div>
+                                        {tempOutline.length > 0 && (
+                                            <div className="space-y-2">
+                                                {tempOutline.map((o, i) => (
+                                                    <div key={i} className="flex items-center gap-2">
+                                                        <select value={o.level} onChange={e => updateOutline(i, { level: e.target.value as OutlineItem['level'] })} className="bg-surface border border-border rounded px-2 py-2 text-xs font-mono uppercase focus:ring-2 focus:ring-primary/30 outline-none" aria-label={`Nível do tópico ${i + 1}`}>
+                                                            {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
+                                                        </select>
+                                                        <input type="text" value={o.text} onChange={e => updateOutline(i, { text: e.target.value })} className="flex-1 bg-surface border border-border rounded px-3 py-2 text-sm focus:ring-2 focus:ring-primary/30 outline-none" placeholder="Ex: Por que escolher" aria-label={`Tópico ${i + 1}`} />
+                                                        <button type="button" onClick={() => moveOutline(i, -1)} disabled={i === 0} className="p-1.5 text-ink-faint hover:text-ink disabled:opacity-30" aria-label="Mover para cima"><ArrowUp className="w-4 h-4" aria-hidden="true" /></button>
+                                                        <button type="button" onClick={() => moveOutline(i, 1)} disabled={i === tempOutline.length - 1} className="p-1.5 text-ink-faint hover:text-ink disabled:opacity-30" aria-label="Mover para baixo"><ArrowDown className="w-4 h-4" aria-hidden="true" /></button>
+                                                        <button type="button" onClick={() => removeOutline(i)} className="p-1.5 text-ink-faint hover:text-red-600" aria-label="Remover tópico"><Trash2 className="w-4 h-4" aria-hidden="true" /></button>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
+                                        )}
                                     </div>
                                 )}
                             </div>
 
-                            {/* Conteúdo — campo inteligente */}
-                            <div>
-                                <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                                    <span className="text-[10px] font-bold text-ink-muted uppercase tracking-widest">Texto da página {tempGenAt && <span className="text-ink-faint normal-case tracking-normal">· gerado {tempGenAt}</span>}</span>
-                                    <div className="flex items-center gap-3">
-                                        <label className="flex items-center gap-1.5 text-xs text-ink-muted cursor-pointer">
-                                            <input type="checkbox" checked={includeFaq} onChange={e => setIncludeFaq(e.target.checked)} className="w-3.5 h-3.5 accent-primary" /> com perguntas frequentes
-                                        </label>
-                                        <button type="button" onClick={generateWithAI} disabled={generating} className="text-xs font-semibold bg-primary-soft text-primary px-3 py-2 min-h-[36px] rounded flex items-center gap-1.5 hover:brightness-95 disabled:opacity-50 transition-all">
-                                            {generating ? <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" /> : <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />}
-                                            {generating ? 'Gerando…' : 'Gerar com IA'}
-                                        </button>
-                                    </div>
+                            {/* RESULTADO — texto gerado, editável */}
+                            {tempContent ? (
+                                <div>
+                                    <span className="block text-[10px] font-bold text-ink-muted uppercase tracking-widest mb-2">O texto {tempGenAt && <span className="text-ink-faint normal-case tracking-normal">· gerado {tempGenAt}</span>}</span>
+                                    <VariableField value={tempContent} onChange={setTempContent} vars={vars} multiline rows={8} placeholder="O texto gerado aparece aqui." aria-label="Texto da página" />
+                                    <p className="text-[10px] text-ink-faint mt-1.5">Pode ajustar à vontade. Os botões inserem cidade/empresa; a prévia mostra como fica.</p>
                                 </div>
-                                <VariableField value={tempContent} onChange={setTempContent} vars={vars} multiline rows={8} placeholder="Escreva o texto da página. Use os botões acima pra inserir a cidade, a empresa, etc." aria-label="Texto da página em markdown" />
-                            </div>
+                            ) : (
+                                <p className="text-sm text-ink-faint text-center bg-elev border border-dashed border-border rounded-md px-4 py-6">
+                                    Clique em <strong className="text-ink-muted">Gerar texto com IA</strong> e a página é escrita pra você.
+                                </p>
+                            )}
 
                             <label className="flex items-center gap-2.5 cursor-pointer">
                                 <input type="checkbox" checked={tempActive} onChange={e => setTempActive(e.target.checked)} className="w-4 h-4 accent-primary" />
