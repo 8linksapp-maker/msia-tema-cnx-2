@@ -4,6 +4,7 @@ import { triggerToast } from '../CmsToaster';
 import { githubApi } from '../../../lib/adminApi';
 import { slugify } from '../../../lib/slugify';
 import VariableField, { type VarDef } from './VariableField';
+import ImageUploadField from './ImageUploadField';
 import type { Service, Niche, Location, LocalBusiness, OutlineItem } from '../../../lib/localTypes';
 
 const LEVELS: OutlineItem['level'][] = ['h2', 'h3', 'h4'];
@@ -279,10 +280,8 @@ export default function ServicesManager() {
                                 </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="svc-img" className="block text-[10px] font-bold text-ink-muted uppercase tracking-widest mb-2">Imagem <span className="text-ink-faint normal-case tracking-normal">(cole o endereço de uma imagem — opcional)</span></label>
-                                <input id="svc-img" type="text" value={tempImage} onChange={e => setTempImage(e.target.value)} className="w-full bg-elev border border-border rounded-md px-4 py-3 text-sm font-mono focus:ring-2 focus:ring-primary/30 outline-none" placeholder="/images/local/andaime.jpg" />
-                            </div>
+                            <ImageUploadField value={tempImage} onChange={setTempImage} namePrefix={tempSlug || tempTitle || 'servico'}
+                                label="Imagem do serviço" hint="Aparece no card e no topo da página. Opcional — sem imagem, usa a cor + ícone." />
 
                             <div>
                                 <label htmlFor="svc-short" className="block text-[10px] font-bold text-ink-muted uppercase tracking-widest mb-2">Descrição curta <span className="text-ink-faint normal-case tracking-normal">(opcional)</span></label>

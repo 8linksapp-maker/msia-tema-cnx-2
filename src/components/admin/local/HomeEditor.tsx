@@ -3,6 +3,7 @@ import { AlertCircle, Loader2, Plus, Trash2, Save, Eye, EyeOff, Monitor } from '
 import { triggerToast } from '../CmsToaster';
 import { githubApi, atomicCommitApi } from '../../../lib/adminApi';
 import VariableField, { type VarDef } from './VariableField';
+import ImageUploadField from './ImageUploadField';
 import type { LocalHome, LocalBusiness, Location, HomeStep, SectionLabel } from '../../../lib/localTypes';
 
 const FIELD = 'w-full bg-elev border border-border rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-primary/30 outline-none';
@@ -162,10 +163,8 @@ export default function HomeEditor() {
                     <label className={LABEL}>Frase de apoio</label>
                     <VariableField value={biz.homeSubtitle || ''} onChange={v => patchBiz({ homeSubtitle: v })} vars={vars} placeholder="Andaimes certificados para obras. Orçamento rápido." aria-label="Frase de apoio do topo" />
                 </div>
-                <div>
-                    <label htmlFor="home-img" className={LABEL}>Imagem de fundo <span className="text-ink-faint normal-case tracking-normal">(cole o endereço de uma imagem — opcional)</span></label>
-                    <input id="home-img" type="text" value={biz.heroImage || ''} onChange={e => patchBiz({ heroImage: e.target.value })} className={FIELD + ' font-mono text-xs'} placeholder="/images/local/hero.jpg" />
-                </div>
+                <ImageUploadField value={biz.heroImage || ''} onChange={v => patchBiz({ heroImage: v })} namePrefix="hero"
+                    label="Imagem de fundo" hint="Aparece atrás do título no topo. Opcional — sem imagem, o topo fica na cor do site." />
             </section>
 
             {/* PROVAS */}
