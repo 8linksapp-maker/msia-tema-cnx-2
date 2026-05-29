@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Loader2, Plus, Trash2, Wrench, X, Edit2, Sparkles, ArrowUp, ArrowDown } from 'lucide-react';
+import { AlertCircle, Loader2, Plus, Trash2, Wrench, X, Edit2, Sparkles, ArrowUp, ArrowDown, PenLine } from 'lucide-react';
 import { triggerToast } from '../CmsToaster';
 import { githubApi } from '../../../lib/adminApi';
 import { slugify } from '../../../lib/slugify';
@@ -38,6 +38,7 @@ export default function ServicesManager() {
     const [includeFaq, setIncludeFaq] = useState(true);
     const [generating, setGenerating] = useState(false);
     const [showOutline, setShowOutline] = useState(false);
+    const [mode, setMode] = useState<'auto' | 'manual'>('auto');
     const [modalError, setModalError] = useState('');
 
     useEffect(() => {
@@ -74,7 +75,7 @@ export default function ServicesManager() {
     const openCreate = () => {
         setTempTitle(''); setTempSlug(''); setTempShort(''); setTempIcon('');
         setTempColor(DEFAULT_COLOR); setTempImage(''); setTempNiche('');
-        setTempOutline([]); setTempContent(''); setTempGenAt(''); setTempActive(true); setIncludeFaq(true); setShowOutline(false);
+        setTempOutline([]); setTempContent(''); setTempGenAt(''); setTempActive(true); setIncludeFaq(true); setShowOutline(false); setMode('auto');
         setSlugTouched(false); setEditingIndex(null); setModalError('');
         setIsModalOpen(true);
     };
@@ -84,7 +85,7 @@ export default function ServicesManager() {
         setTempIcon(s.icon || ''); setTempColor(effectiveColor(s)); setTempImage(s.image || '');
         setTempNiche(s.niche || ''); setTempOutline(s.outline ? [...s.outline] : []);
         setTempContent(s.generatedContent || ''); setTempGenAt(s.contentGeneratedAt || '');
-        setTempActive(s.active !== false); setShowOutline((s.outline?.length ?? 0) > 0);
+        setTempActive(s.active !== false); setShowOutline((s.outline?.length ?? 0) > 0); setMode('auto');
         setSlugTouched(true); setEditingIndex(idx); setModalError('');
         setIsModalOpen(true);
     };
@@ -289,7 +290,24 @@ export default function ServicesManager() {
                                 <input id="svc-short" type="text" value={tempShort} onChange={e => setTempShort(e.target.value)} className="w-full bg-elev border border-border rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-primary/30 outline-none" placeholder="Andaimes metálicos para obras e fachadas" />
                             </div>
 
-                            {/* TEXTO — a IA escreve (primeiro plano); outline é opcional/escondido */}
+                            {/* TEXTO DA PÁGINA — escolhe automático (IA) ou manual */}
+                            <div>
+                                <span className="block text-[10px] font-bold text-ink-muted uppercase tracking-widest mb-2">Texto da página</span>
+                                <div role="tablist" aria-label="Como criar o texto" className="flex gap-1 bg-elev rounded-md p-1 w-fit">
+                                    <button type="button" role="tab" aria-selected={mode === 'auto'} onClick={() => setMode('auto')}
+                                        className={`flex items-center gap-1.5 px-3 py-2 min-h-[38px] rounded text-sm font-semibold transition-all ${mode === 'auto' ? 'bg-surface text-primary shadow-sm' : 'text-ink-muted hover:text-ink'}`}>
+                                        <Sparkles className="w-4 h-4" aria-hidden="true" /> Automático
+                                    </button>
+                                    <button type="button" role="tab" aria-selected={mode === 'manual'} onClick={() => setMode('manual')}
+                                        className={`flex items-center gap-1.5 px-3 py-2 min-h-[38px] rounded text-sm font-semibold transition-all ${mode === 'manual' ? 'bg-surface text-primary shadow-sm' : 'text-ink-muted hover:text-ink'}`}>
+                                        <PenLine className="w-4 h-4" aria-hidden="true" /> Manual
+                                    </button>
+                                </div>
+                            </div>
+
+                            {mode === 'auto' ? (
+                              <>
+                            {/* AUTOMÁTICO — a IA escreve; outline é opcional/escondido */}
                             <div className="rounded-lg border border-primary/30 bg-primary-soft/40 p-4">
                                 <div className="flex items-start gap-3">
                                     <span className="shrink-0 w-9 h-9 rounded-full bg-primary text-surface flex items-center justify-center" aria-hidden="true"><Sparkles className="w-4 h-4" /></span>
@@ -348,6 +366,13 @@ export default function ServicesManager() {
                                 <p className="text-sm text-ink-faint text-center bg-elev border border-dashed border-border rounded-md px-4 py-6">
                                     Clique em <strong className="text-ink-muted">Gerar texto com IA</strong> e a página é escrita pra você.
                                 </p>
+                            )}
+                              </>
+                            ) : (
+                                <div>
+                                    <VariableField value={tempContent} onChange={setTempContent} vars={vars} multiline rows={10} placeholder="Escreva o texto da página do serviço, do seu jeito." aria-label="Texto da página" />
+                                    <p className="text-[10px] text-ink-faint mt-1.5">Use os botões pra inserir cidade/empresa — a prévia mostra como fica em cada cidade.</p>
+                                </div>
                             )}
 
                             <label className="flex items-center gap-2.5 cursor-pointer">
