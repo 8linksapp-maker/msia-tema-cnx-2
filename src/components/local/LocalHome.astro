@@ -42,7 +42,7 @@ const rgba = (hex: string, a: number) => {
   {/* Escurecida padrão: preta sobre a foto pro texto sobressair; drench colorido quando não há foto. */}
   <div aria-hidden="true" class="absolute inset-0 -z-10"
     style={heroImg
-      ? 'background: linear-gradient(180deg, rgb(8 8 10 / 0.52) 0%, rgb(8 8 10 / 0.70) 100%);'
+      ? 'background: linear-gradient(180deg, rgb(10 10 12 / 0.70) 0%, rgb(10 10 12 / 0.84) 100%);'
       : 'background-color: rgb(20 20 24 / 0.16);'}></div>
   {!heroImg && (
     <span aria-hidden="true"
@@ -50,7 +50,7 @@ const rgba = (hex: string, a: number) => {
       {heroInitial}
     </span>
   )}
-  <div class="container-x pt-20 md:pt-28 pb-16 md:pb-24 text-center relative">
+  <div class="container-x pt-20 md:pt-28 pb-16 md:pb-24 text-center relative" style={heroImg ? 'text-shadow: 0 1px 14px rgb(0 0 0 / 0.5);' : ''}>
     <p class="mono uppercase mb-6 opacity-80">{company}{cities[0] ? ` · ${cities[0].name}` : ''}</p>
     <h1 class="font-display max-w-3xl mx-auto" style="color: inherit;">{heroTitle}</h1>
     {heroSubtitle && <p class="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mt-5 opacity-90">{heroSubtitle}</p>}
