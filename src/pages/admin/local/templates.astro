@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import TemplatesManager from '../../../components/admin/local/TemplatesManager';
+---
+<AdminLayout title="Modelos de nicho" activeSection="local-templates">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-ink">Comece com um modelo</h1>
+        <p class="text-ink-muted mt-1">Escolha o ramo do seu negócio e os serviços já entram prontos. Depois é só escolher onde você atende e publicar.</p>
+    </div>
+    <TemplatesManager client:load />
+</AdminLayout>

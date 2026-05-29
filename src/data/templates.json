@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "aluguel-andaime",
+    "name": "Aluguel de Andaime",
+    "icon": "🏗️",
+    "color": "#1c64c8",
+    "description": "Locação de andaimes e equipamentos para obras e fachadas.",
+    "services": [
+      { "title": "Aluguel de Andaime", "icon": "🏗️", "shortDescription": "Andaimes metálicos para obras e fachadas, com entrega e montagem.", "outline": [ { "level": "h2", "text": "Por que alugar com a gente" }, { "level": "h2", "text": "Como funciona a locação" }, { "level": "h2", "text": "Entrega e montagem" } ] },
+      { "title": "Andaime Fachadeiro", "icon": "🧱", "shortDescription": "Andaime fachadeiro para pintura e revestimento de fachadas.", "outline": [ { "level": "h2", "text": "Quando usar o andaime fachadeiro" }, { "level": "h2", "text": "Segurança e norma" }, { "level": "h2", "text": "Prazos e valores" } ] },
+      { "title": "Andaime Tubular", "icon": "🪛", "shortDescription": "Andaime tubular resistente para obras de qualquer porte.", "outline": [ { "level": "h2", "text": "Vantagens do andaime tubular" }, { "level": "h2", "text": "Como funciona a locação" }, { "level": "h2", "text": "Montagem segura" } ] },
+      { "title": "Andaime Suspenso", "icon": "🏢", "shortDescription": "Andaime suspenso para trabalhos em altura e fachadas altas.", "outline": [ { "level": "h2", "text": "Para quais serviços serve" }, { "level": "h2", "text": "Segurança em altura" }, { "level": "h2", "text": "Como solicitar" } ] },
+      { "title": "Plataforma Elevatória", "icon": "⬆️", "shortDescription": "Locação de plataforma elevatória para acesso seguro em altura.", "outline": [ { "level": "h2", "text": "Quando usar" }, { "level": "h2", "text": "Tipos disponíveis" }, { "level": "h2", "text": "Orçamento e entrega" } ] },
+      { "title": "Escoramento", "icon": "🏗️", "shortDescription": "Escoras e escoramento metálico para lajes e estruturas.", "outline": [ { "level": "h2", "text": "Onde o escoramento é usado" }, { "level": "h2", "text": "Como funciona" }, { "level": "h2", "text": "Atendimento e prazos" } ] }
+    ]
+  },
+  {
+    "slug": "eletricista",
+    "name": "Eletricista",
+    "icon": "💡",
+    "color": "#c49838",
+    "description": "Serviços elétricos residenciais e comerciais.",
+    "services": [
+      { "title": "Instalação Elétrica", "icon": "🔌", "shortDescription": "Instalação elétrica completa para casas e comércios.", "outline": [ { "level": "h2", "text": "O que está incluso" }, { "level": "h2", "text": "Como funciona o serviço" }, { "level": "h2", "text": "Segurança e garantia" } ] },
+      { "title": "Troca de Disjuntor", "icon": "⚡", "shortDescription": "Troca e instalação de disjuntores com segurança.", "outline": [ { "level": "h2", "text": "Quando trocar o disjuntor" }, { "level": "h2", "text": "Como é feito" }, { "level": "h2", "text": "Atendimento rápido" } ] },
+      { "title": "Instalação de Tomadas", "icon": "🔋", "shortDescription": "Instalação e troca de tomadas e interruptores.", "outline": [ { "level": "h2", "text": "Tipos de instalação" }, { "level": "h2", "text": "Como funciona" }, { "level": "h2", "text": "Orçamento sem compromisso" } ] },
+      { "title": "Quadro de Energia", "icon": "🗄️", "shortDescription": "Montagem e revisão de quadro de distribuição de energia.", "outline": [ { "level": "h2", "text": "Por que revisar o quadro" }, { "level": "h2", "text": "Como é feito o serviço" }, { "level": "h2", "text": "Segurança e norma" } ] },
+      { "title": "Aterramento", "icon": "🌐", "shortDescription": "Instalação de aterramento para proteção elétrica.", "outline": [ { "level": "h2", "text": "Por que ter aterramento" }, { "level": "h2", "text": "Como funciona" }, { "level": "h2", "text": "Atendimento" } ] },
+      { "title": "Eletricista 24 Horas", "icon": "🕐", "shortDescription": "Atendimento elétrico de emergência a qualquer hora.", "outline": [ { "level": "h2", "text": "Emergências que atendemos" }, { "level": "h2", "text": "Como chamar" }, { "level": "h2", "text": "Atendimento rápido" } ] }
+    ]
+  },
+  {
+    "slug": "encanador",
+    "name": "Encanador",
+    "icon": "🔧",
+    "color": "#2f6d6a",
+    "description": "Serviços hidráulicos, vazamentos e desentupimento.",
+    "services": [
+      { "title": "Desentupimento", "icon": "🚿", "shortDescription": "Desentupimento de pias, ralos, vasos e esgoto.", "outline": [ { "level": "h2", "text": "O que desentupimos" }, { "level": "h2", "text": "Como funciona" }, { "level": "h2", "text": "Atendimento rápido" } ] },
+      { "title": "Conserto de Vazamento", "icon": "💧", "shortDescription": "Conserto de vazamentos em canos, torneiras e registros.", "outline": [ { "level": "h2", "text": "Sinais de vazamento" }, { "level": "h2", "text": "Como resolvemos" }, { "level": "h2", "text": "Garantia do serviço" } ] },
+      { "title": "Instalação Hidráulica", "icon": "🛠️", "shortDescription": "Instalação e reforma de tubulação hidráulica.", "outline": [ { "level": "h2", "text": "O que está incluso" }, { "level": "h2", "text": "Como funciona" }, { "level": "h2", "text": "Orçamento sem compromisso" } ] },
+      { "title": "Caça-Vazamento", "icon": "🔎", "shortDescription": "Localização de vazamentos sem quebra-quebra.", "outline": [ { "level": "h2", "text": "Como localizamos o vazamento" }, { "level": "h2", "text": "Tecnologia usada" }, { "level": "h2", "text": "Atendimento" } ] },
+      { "title": "Limpeza de Caixa d'Água", "icon": "🪣", "shortDescription": "Limpeza e higienização de caixa d'água.", "outline": [ { "level": "h2", "text": "Por que limpar a caixa" }, { "level": "h2", "text": "Como é feito" }, { "level": "h2", "text": "Periodicidade recomendada" } ] },
+      { "title": "Encanador 24 Horas", "icon": "🕐", "shortDescription": "Atendimento hidráulico de emergência a qualquer hora.", "outline": [ { "level": "h2", "text": "Emergências que atendemos" }, { "level": "h2", "text": "Como chamar" }, { "level": "h2", "text": "Atendimento rápido" } ] }
+    ]
+  },
+  {
+    "slug": "chaveiro",
+    "name": "Chaveiro",
+    "icon": "🔑",
+    "color": "#8c344c",
+    "description": "Chaveiro 24h: abertura, cópias e fechaduras.",
+    "services": [
+      { "title": "Abertura de Portas", "icon": "🚪", "shortDescription": "Abertura de portas residenciais e comerciais sem danos.", "outline": [ { "level": "h2", "text": "Como abrimos sem danificar" }, { "level": "h2", "text": "Atendimento rápido" }, { "level": "h2", "text": "Quando chamar" } ] },
+      { "title": "Cópia de Chaves", "icon": "🗝️", "shortDescription": "Cópia de chaves comuns, codificadas e tetra.", "outline": [ { "level": "h2", "text": "Tipos de chave que copiamos" }, { "level": "h2", "text": "Como funciona" }, { "level": "h2", "text": "Prazo e preço" } ] },
+      { "title": "Troca de Fechadura", "icon": "🔒", "shortDescription": "Troca e instalação de fechaduras de todos os tipos.", "outline": [ { "level": "h2", "text": "Quando trocar a fechadura" }, { "level": "h2", "text": "Modelos disponíveis" }, { "level": "h2", "text": "Instalação no local" } ] },
+      { "title": "Chave Codificada", "icon": "🔐", "shortDescription": "Cópia e confecção de chave codificada automotiva.", "outline": [ { "level": "h2", "text": "O que é chave codificada" }, { "level": "h2", "text": "Como fazemos a cópia" }, { "level": "h2", "text": "Atendimento" } ] },
+      { "title": "Abertura de Cofre", "icon": "🧰", "shortDescription": "Abertura e manutenção de cofres com segurança.", "outline": [ { "level": "h2", "text": "Tipos de cofre que abrimos" }, { "level": "h2", "text": "Como funciona" }, { "level": "h2", "text": "Atendimento discreto" } ] },
+      { "title": "Chaveiro 24 Horas", "icon": "🕐", "shortDescription": "Chaveiro de emergência a qualquer hora do dia.", "outline": [ { "level": "h2", "text": "Emergências que atendemos" }, { "level": "h2", "text": "Como chamar" }, { "level": "h2", "text": "Atendimento rápido" } ] }
+    ]
+  }
+]
