@@ -1,89 +1,152 @@
 [
   {
-    "title": "Aluguel de Andaime",
-    "slug": "aluguel-de-andaime",
-    "shortDescription": "Andaimes metálicos para obras e fachadas, com entrega e montagem.",
-    "icon": "🏗️",
-    "image": "/images/local/aluguel-de-andaime.jpg",
-    "niche": "aluguel-andaime",
+    "title": "Instalação Elétrica",
+    "slug": "instalacao-eletrica",
+    "color": "#c49838",
+    "niche": "eletricista",
+    "active": true,
+    "icon": "🔌",
+    "shortDescription": "Instalação elétrica completa para casas e comércios.",
     "outline": [
-      { "level": "h2", "text": "Por que escolher" },
-      { "level": "h2", "text": "Como funciona a locação" }
+      {
+        "level": "h2",
+        "text": "O que está incluso"
+      },
+      {
+        "level": "h2",
+        "text": "Como funciona o serviço"
+      },
+      {
+        "level": "h2",
+        "text": "Segurança e garantia"
+      }
     ],
-    "generatedContent": "## {servico} em {cidade}\n\nProcurando **{servico} em {cidade}, {estado}**? A {empresa} atende toda a região de {cidade} com andaimes metálicos certificados, montagem rápida e preço justo.\n\n## Por que escolher a {empresa}\n\n- Entrega e retirada em {cidade}\n- Orçamento sem compromisso\n- Equipamentos revisados e dentro da norma\n- Atendimento por telefone e WhatsApp\n\n## Como funciona a locação\n\nVocê informa a metragem e o prazo, a gente leva o andaime até a obra em {cidade} e cuida da montagem. No fim do período, retiramos tudo.\n\nFale com a {empresa} pelo telefone {telefone}.\n\n## Perguntas frequentes\n\n### Vocês atendem {cidade}?\n\nSim, a {empresa} faz entrega e montagem em {cidade} e em toda a região.\n\n### Qual o prazo mínimo de locação?\n\nO prazo é flexível. Fale com a {empresa} pelo telefone {telefone} para combinar.",
-    "contentGeneratedAt": "2026-05-28",
-    "active": true
+    "generatedContent": "## O que está incluso\n\nProcurando Instalação Elétrica em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Como funciona o serviço\n\nProcurando Instalação Elétrica em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Segurança e garantia\n\nProcurando Instalação Elétrica em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Perguntas frequentes\n\n### Vocês atendem {cidade}?\n\nSim, a {empresa} atende {cidade} e região.\n\n### Como peço um orçamento?\n\nÉ só ligar para {telefone} ou chamar no WhatsApp.",
+    "contentGeneratedAt": "2026-05-29"
   },
   {
-    "title": "Andaime Fachadeiro",
-    "slug": "andaime-fachadeiro",
-    "shortDescription": "Andaime fachadeiro para pintura e revestimento de fachadas.",
-    "icon": "🧱",
-    "image": "/images/local/andaime-fachadeiro.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
+    "title": "Troca de Disjuntor",
+    "slug": "troca-de-disjuntor",
+    "color": "#c49838",
+    "niche": "eletricista",
+    "active": true,
+    "icon": "⚡",
+    "shortDescription": "Troca e instalação de disjuntores com segurança.",
+    "outline": [
+      {
+        "level": "h2",
+        "text": "Quando trocar o disjuntor"
+      },
+      {
+        "level": "h2",
+        "text": "Como é feito"
+      },
+      {
+        "level": "h2",
+        "text": "Atendimento rápido"
+      }
+    ],
+    "generatedContent": "## Quando trocar o disjuntor\n\nProcurando Troca de Disjuntor em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Como é feito\n\nProcurando Troca de Disjuntor em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Atendimento rápido\n\nProcurando Troca de Disjuntor em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Perguntas frequentes\n\n### Vocês atendem {cidade}?\n\nSim, a {empresa} atende {cidade} e região.\n\n### Como peço um orçamento?\n\nÉ só ligar para {telefone} ou chamar no WhatsApp.",
+    "contentGeneratedAt": "2026-05-29"
   },
   {
-    "title": "Andaime Tubular",
-    "slug": "andaime-tubular",
-    "shortDescription": "Andaime tubular resistente para obras de qualquer porte.",
-    "icon": "🪛",
-    "image": "/images/local/andaime-tubular.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
+    "title": "Instalação de Tomadas",
+    "slug": "instalacao-de-tomadas",
+    "color": "#c49838",
+    "niche": "eletricista",
+    "active": true,
+    "icon": "🔋",
+    "shortDescription": "Instalação e troca de tomadas e interruptores.",
+    "outline": [
+      {
+        "level": "h2",
+        "text": "Tipos de instalação"
+      },
+      {
+        "level": "h2",
+        "text": "Como funciona"
+      },
+      {
+        "level": "h2",
+        "text": "Orçamento sem compromisso"
+      }
+    ],
+    "generatedContent": "## Tipos de instalação\n\nProcurando Instalação de Tomadas em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Como funciona\n\nProcurando Instalação de Tomadas em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Orçamento sem compromisso\n\nProcurando Instalação de Tomadas em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Perguntas frequentes\n\n### Vocês atendem {cidade}?\n\nSim, a {empresa} atende {cidade} e região.\n\n### Como peço um orçamento?\n\nÉ só ligar para {telefone} ou chamar no WhatsApp.",
+    "contentGeneratedAt": "2026-05-29"
   },
   {
-    "title": "Andaime Suspenso",
-    "slug": "andaime-suspenso",
-    "shortDescription": "Andaime suspenso para trabalhos em altura e fachadas altas.",
-    "icon": "🏢",
-    "image": "/images/local/andaime-suspenso.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
+    "title": "Quadro de Energia",
+    "slug": "quadro-de-energia",
+    "color": "#c49838",
+    "niche": "eletricista",
+    "active": true,
+    "icon": "🗄️",
+    "shortDescription": "Montagem e revisão de quadro de distribuição de energia.",
+    "outline": [
+      {
+        "level": "h2",
+        "text": "Por que revisar o quadro"
+      },
+      {
+        "level": "h2",
+        "text": "Como é feito o serviço"
+      },
+      {
+        "level": "h2",
+        "text": "Segurança e norma"
+      }
+    ],
+    "generatedContent": "## Por que revisar o quadro\n\nProcurando Quadro de Energia em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Como é feito o serviço\n\nProcurando Quadro de Energia em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Segurança e norma\n\nProcurando Quadro de Energia em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Perguntas frequentes\n\n### Vocês atendem {cidade}?\n\nSim, a {empresa} atende {cidade} e região.\n\n### Como peço um orçamento?\n\nÉ só ligar para {telefone} ou chamar no WhatsApp.",
+    "contentGeneratedAt": "2026-05-29"
   },
   {
-    "title": "Plataforma Elevatória",
-    "slug": "plataforma-elevatoria",
-    "shortDescription": "Locação de plataforma elevatória para acesso seguro em altura.",
-    "icon": "⬆️",
-    "image": "/images/local/plataforma-elevatoria.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
+    "title": "Aterramento",
+    "slug": "aterramento",
+    "color": "#c49838",
+    "niche": "eletricista",
+    "active": true,
+    "icon": "🌐",
+    "shortDescription": "Instalação de aterramento para proteção elétrica.",
+    "outline": [
+      {
+        "level": "h2",
+        "text": "Por que ter aterramento"
+      },
+      {
+        "level": "h2",
+        "text": "Como funciona"
+      },
+      {
+        "level": "h2",
+        "text": "Atendimento"
+      }
+    ],
+    "generatedContent": "## Por que ter aterramento\n\nProcurando Aterramento em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Como funciona\n\nProcurando Aterramento em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Atendimento\n\nProcurando Aterramento em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Perguntas frequentes\n\n### Vocês atendem {cidade}?\n\nSim, a {empresa} atende {cidade} e região.\n\n### Como peço um orçamento?\n\nÉ só ligar para {telefone} ou chamar no WhatsApp.",
+    "contentGeneratedAt": "2026-05-29"
   },
   {
-    "title": "Escada de Alumínio",
-    "slug": "escada-de-aluminio",
-    "shortDescription": "Escadas de alumínio extensíveis para manutenção e obras.",
-    "icon": "🪜",
-    "image": "/images/local/escada-de-aluminio.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
-  },
-  {
-    "title": "Betoneira",
-    "slug": "betoneira",
-    "shortDescription": "Aluguel de betoneira para preparo de concreto na obra.",
-    "icon": "🛠️",
-    "image": "/images/local/betoneira.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
-  },
-  {
-    "title": "Torre de Andaime",
-    "slug": "torre-de-andaime",
-    "shortDescription": "Torre de andaime móvel para alcançar grandes alturas com estabilidade.",
-    "icon": "🗼",
-    "image": "/images/local/torre-de-andaime.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
-  },
-  {
-    "title": "Escoramento",
-    "slug": "escoramento",
-    "shortDescription": "Escoras e escoramento metálico para lajes e estruturas.",
-    "icon": "🏗️",
-    "image": "/images/local/escoramento.jpg",
-    "niche": "aluguel-andaime",
-    "active": true
+    "title": "Eletricista 24 Horas",
+    "slug": "eletricista-24-horas",
+    "color": "#c49838",
+    "niche": "eletricista",
+    "active": true,
+    "icon": "🕐",
+    "shortDescription": "Atendimento elétrico de emergência a qualquer hora.",
+    "outline": [
+      {
+        "level": "h2",
+        "text": "Emergências que atendemos"
+      },
+      {
+        "level": "h2",
+        "text": "Como chamar"
+      },
+      {
+        "level": "h2",
+        "text": "Atendimento rápido"
+      }
+    ],
+    "generatedContent": "## Emergências que atendemos\n\nProcurando Eletricista 24 Horas em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Como chamar\n\nProcurando Eletricista 24 Horas em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Atendimento rápido\n\nProcurando Eletricista 24 Horas em {cidade}, {estado}? A {empresa} atende toda a região de {cidade}. Fale com a gente pelo telefone {telefone}.\n\n## Perguntas frequentes\n\n### Vocês atendem {cidade}?\n\nSim, a {empresa} atende {cidade} e região.\n\n### Como peço um orçamento?\n\nÉ só ligar para {telefone} ou chamar no WhatsApp.",
+    "contentGeneratedAt": "2026-05-29"
   }
 ]
