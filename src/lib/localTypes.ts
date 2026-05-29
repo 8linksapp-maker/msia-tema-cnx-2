@@ -31,8 +31,14 @@ export interface Service {
   slug: string;
   shortDescription?: string;
   icon?: string;
-  /** slug do Niche dono deste serviço. */
-  niche: string;
+  /** Imagem ilustrativa do serviço (URL/caminho). Trocável pelo usuário no admin (Francis).
+   *  Vazio → card cai no bloco de cor do serviço como fallback. */
+  image?: string;
+  /** Cor do card/página deste serviço (hex). Escolhida direto no serviço.
+   *  Leitura: svc.color || niche?.color || default. */
+  color?: string;
+  /** Legado: slug do antigo Niche. Mantido p/ retrocompat; a cor agora vive no serviço. */
+  niche?: string;
   outline?: OutlineItem[];
   /** Markdown com tokens {cidade}/{servico}/{estado}/{empresa}/{telefone}. Vazio → usa localTemplate. */
   generatedContent?: string;
