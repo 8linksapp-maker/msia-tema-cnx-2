@@ -3,7 +3,7 @@ import {
     FileText, Tag, Users, Info, Phone,
     Shield, Settings, LogOut, ExternalLink, Navigation,
     Package, FileArchive, PenLine, ChevronRight, Home, Sparkles,
-    Layers, Wrench, MapPin,
+    Layers, Wrench, MapPin, LayoutGrid,
 } from 'lucide-react';
 
 interface NavItem {
@@ -20,6 +20,7 @@ const localItems: NavItem[] = [
     { label: 'Nichos', href: '/admin/local/niches', icon: Layers, section: 'local-niches' },
     { label: 'Serviços', href: '/admin/local/services', icon: Wrench, section: 'local-services' },
     { label: 'Localidades', href: '/admin/local/locations', icon: MapPin, section: 'local-locations' },
+    { label: 'Páginas', href: '/admin/local/pages', icon: LayoutGrid, section: 'local-pages' },
 ];
 
 const pageItems: NavItem[] = [
