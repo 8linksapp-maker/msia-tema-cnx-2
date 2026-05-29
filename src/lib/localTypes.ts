@@ -123,6 +123,8 @@ export interface SectionLabel {
 export interface LocalHome {
   trust?: string[];
   benefits?: string[];
+  /** Slugs dos serviços em destaque na home (máx 9, na ordem). Vazio → os 9 primeiros. */
+  featuredServices?: string[];
   steps?: HomeStep[];
   ctaTitle?: string;
   ctaSubtitle?: string;

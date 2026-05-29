@@ -106,8 +106,14 @@ export function loadHomeData(preview?: HomePreview) {
   const serviceHref = (svc: Service) => (principalLoc ? `/${principalLoc.slug}/${svc.slug}` : '#');
   const empty = services.length === 0 || builtLocations.length === 0;
 
+  // Serviços que aparecem na home: os em destaque (na ordem) ou os 9 primeiros.
+  const featured = (home.featuredServices || [])
+    .map((slug) => services.find((s) => s.slug === slug))
+    .filter(Boolean) as Service[];
+  const homeServices = (featured.length ? featured : services).slice(0, 9);
+
   return {
-    services, builtLocations, principalLoc, cities, region, niches, nicheOf, company,
+    services, homeServices, builtLocations, principalLoc, cities, region, niches, nicheOf, company,
     heroColor, heroImg, heroInk, heroInitial, accent, accentInk,
     waUrl, phoneHref, biz,
     heroTitle, heroSubtitle, aboutParas,

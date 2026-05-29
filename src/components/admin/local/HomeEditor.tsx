@@ -4,7 +4,7 @@ import { triggerToast } from '../CmsToaster';
 import { githubApi, atomicCommitApi } from '../../../lib/adminApi';
 import VariableField, { type VarDef } from './VariableField';
 import ImageUploadField from './ImageUploadField';
-import type { LocalHome, LocalBusiness, Location, HomeStep, SectionLabel } from '../../../lib/localTypes';
+import type { LocalHome, LocalBusiness, Location, Service, HomeStep, SectionLabel } from '../../../lib/localTypes';
 
 const FIELD = 'w-full bg-elev border border-border rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-primary/30 outline-none';
 const LABEL = 'block text-[10px] font-bold text-ink-muted uppercase tracking-widest mb-2';
@@ -20,6 +20,7 @@ export default function HomeEditor() {
     const [home, setHome] = useState<LocalHome>({});
     const [biz, setBiz] = useState<LocalBusiness>({ companyName: '' });
     const [locations, setLocations] = useState<Location[]>([]);
+    const [services, setServices] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState('');
@@ -31,11 +32,13 @@ export default function HomeEditor() {
             githubApi('read', 'src/data/localHome.json').catch(e => { if (e.message.includes('404')) return { content: '{}' }; throw e; }),
             githubApi('read', 'src/data/localBusiness.json').catch(() => ({ content: '{}' })),
             githubApi('read', 'src/data/locations.json').catch(() => ({ content: '[]' })),
+            githubApi('read', 'src/data/services.json').catch(() => ({ content: '[]' })),
         ])
-            .then(([h, b, loc]) => {
+            .then(([h, b, loc, svc]) => {
                 setHome(JSON.parse(h?.content || '{}'));
                 setBiz({ companyName: '', ...JSON.parse(b?.content || '{}') });
                 setLocations(JSON.parse(loc?.content || '[]'));
+                setServices(JSON.parse(svc?.content || '[]'));
             })
             .catch(err => setError(err.message))
             .finally(() => setLoading(false));
@@ -76,6 +79,14 @@ export default function HomeEditor() {
     const setBenefit = (i: number, v: string) => patch({ benefits: benefits.map((t, k) => k === i ? v : t) });
     const steps = home.steps || [];
     const setStep = (i: number, p: Partial<HomeStep>) => patch({ steps: steps.map((s, k) => k === i ? { ...s, ...p } : s) });
+
+    // Serviços em destaque na home (máx 9).
+    const featured = home.featuredServices || [];
+    const toggleFeatured = (slug: string) => {
+        if (featured.includes(slug)) patch({ featuredServices: featured.filter(s => s !== slug) });
+        else if (featured.length < 9) patch({ featuredServices: [...featured, slug] });
+        else triggerToast('Já são 9 serviços em destaque. Remova um para adicionar outro.', 'progress', 100);
+    };
 
     const save = async () => {
         setSaving(true); setError('');
@@ -189,10 +200,33 @@ export default function HomeEditor() {
                 </div>
             </section>
 
-            {/* SERVIÇOS (rótulos) */}
+            {/* SERVIÇOS (rótulos + destaque) */}
             <section className="bg-surface border border-border rounded-lg p-6 space-y-4">
-                <div><h2 className="font-bold text-ink">Serviços</h2><p className="text-sm text-ink-muted">Os cards vêm de <a href="/admin/local/services" className="text-primary underline">Serviços</a>. Aqui você edita os títulos da seção.</p></div>
+                <div><h2 className="font-bold text-ink">Serviços</h2><p className="text-sm text-ink-muted">Os cards vêm de <a href="/admin/local/services" className="text-primary underline">Serviços</a>. Aqui você edita os títulos da seção e escolhe quais aparecem.</p></div>
                 <SectionLabelFields k="servicos" />
+                <div>
+                    <div className="flex items-center justify-between mb-1">
+                        <span className={LABEL + ' mb-0'}>Serviços em destaque na home</span>
+                        <span className={`text-xs font-semibold ${featured.length >= 9 ? 'text-primary' : 'text-ink-faint'}`}>{featured.length}/9</span>
+                    </div>
+                    <p className="text-xs text-ink-muted mb-2">Escolha até 9 pra aparecer na home. Sem escolher, mostramos os 9 primeiros.</p>
+                    {services.length === 0 ? (
+                        <p className="text-xs text-ink-faint bg-elev rounded-md px-4 py-3">Você ainda não tem serviços. <a href="/admin/local/templates" className="text-primary underline">Use um template</a> ou <a href="/admin/local/services" className="text-primary underline">crie serviços</a>.</p>
+                    ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-64 overflow-y-auto border border-border rounded-md p-2">
+                            {services.map((s) => {
+                                const on = featured.includes(s.slug);
+                                const atMax = !on && featured.length >= 9;
+                                return (
+                                    <label key={s.slug} className={`flex items-center gap-2.5 px-2 py-1.5 rounded ${atMax ? 'opacity-40 cursor-not-allowed' : 'hover:bg-elev cursor-pointer'}`}>
+                                        <input type="checkbox" checked={on} disabled={atMax} onChange={() => toggleFeatured(s.slug)} className="w-4 h-4 accent-primary" />
+                                        <span className="text-sm text-ink truncate">{s.icon || '🔧'} {s.title}</span>
+                                    </label>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
             </section>
 
             {/* COMO FUNCIONA */}
