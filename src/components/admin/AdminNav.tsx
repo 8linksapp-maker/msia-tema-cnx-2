@@ -3,7 +3,7 @@ import {
     FileText, Tag, Users, Info, Phone,
     Shield, Settings, LogOut, ExternalLink, Navigation,
     Package, FileArchive, PenLine, ChevronRight, Home, Sparkles,
-    Layers, Wrench, MapPin, LayoutGrid, FileType, LayoutTemplate,
+    Wrench, MapPin, LayoutTemplate, Store, Rocket,
 } from 'lucide-react';
 
 interface NavItem {
@@ -15,14 +15,13 @@ interface NavItem {
 
 const contentSections = ['posts', 'categories', 'authors'];
 
-// Site Local — gerador de páginas de SEO (cidade × serviço). Itens adicionados por fatia.
+// Site Local — gerador de páginas de SEO local. Ordem = jeito que o dono pensa.
 const localItems: NavItem[] = [
+    { label: 'Minha empresa', href: '/admin/local/empresa', icon: Store, section: 'local-empresa' },
     { label: 'Página inicial', href: '/admin/local/home', icon: LayoutTemplate, section: 'local-home' },
-    { label: 'Nichos', href: '/admin/local/niches', icon: Layers, section: 'local-niches' },
     { label: 'Serviços', href: '/admin/local/services', icon: Wrench, section: 'local-services' },
-    { label: 'Localidades', href: '/admin/local/locations', icon: MapPin, section: 'local-locations' },
-    { label: 'Páginas', href: '/admin/local/pages', icon: LayoutGrid, section: 'local-pages' },
-    { label: 'Modelo de página', href: '/admin/local/template', icon: FileType, section: 'local-template' },
+    { label: 'Onde atendemos', href: '/admin/local/locations', icon: MapPin, section: 'local-locations' },
+    { label: 'Publicar', href: '/admin/local/pages', icon: Rocket, section: 'local-pages' },
 ];
 
 const pageItems: NavItem[] = [

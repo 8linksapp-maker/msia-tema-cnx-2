@@ -122,6 +122,7 @@ export interface SectionLabel {
  */
 export interface LocalHome {
   trust?: string[];
+  benefits?: string[];
   steps?: HomeStep[];
   ctaTitle?: string;
   ctaSubtitle?: string;

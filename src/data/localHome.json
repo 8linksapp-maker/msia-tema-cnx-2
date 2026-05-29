@@ -4,6 +4,11 @@
     "Atendemos {cidade} e região",
     "Resposta rápida no WhatsApp"
   ],
+  "benefits": [
+    "Atendimento rápido em {cidade}",
+    "Orçamento gratuito",
+    "Equipamentos revisados"
+  ],
   "steps": [
     {
       "title": "Você pede o orçamento",
