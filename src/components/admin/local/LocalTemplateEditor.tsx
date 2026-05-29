@@ -97,6 +97,46 @@ export default function LocalTemplateEditor() {
                             <label htmlFor="biz-wamsg" className={LABEL}>Mensagem inicial do WhatsApp</label>
                             <input id="biz-wamsg" type="text" value={biz.whatsappMessage || ''} onChange={e => patchBiz({ whatsappMessage: e.target.value })} className={FIELD} placeholder="Olá! Vim pelo site e gostaria de um orçamento." />
                         </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label htmlFor="biz-address" className={LABEL}>Endereço</label>
+                                <input id="biz-address" type="text" value={biz.address || ''} onChange={e => patchBiz({ address: e.target.value })} className={FIELD} placeholder="Av. Exemplo, 1000 - Moema, São Paulo - SP" />
+                            </div>
+                            <div>
+                                <label htmlFor="biz-hours" className={LABEL}>Horário de atendimento</label>
+                                <input id="biz-hours" type="text" value={biz.hours || ''} onChange={e => patchBiz({ hours: e.target.value })} className={FIELD} placeholder="Seg a Sex: 8h às 18h" />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="biz-map" className={LABEL}>Mapa do Google <span className="text-ink-faint normal-case tracking-normal">(cole o link de incorporação)</span></label>
+                            <textarea id="biz-map" rows={2} value={biz.mapEmbed || ''} onChange={e => patchBiz({ mapEmbed: e.target.value })} className={FIELD + ' resize-y font-mono text-xs'} placeholder='No Google Maps: Compartilhar → Incorporar um mapa → copiar o código (ou só o link src) e colar aqui' />
+                            <p className="text-[10px] text-ink-faint mt-1.5">Pode colar o código completo do iframe ou só o endereço do mapa. Vazio = mostra um aviso no lugar do mapa.</p>
+                        </div>
+                    </section>
+
+                    {/* Página inicial (home) */}
+                    <section className="bg-surface border border-border rounded-lg p-6 space-y-4">
+                        <div>
+                            <h2 className="font-bold text-ink">Página inicial</h2>
+                            <p className="text-sm text-ink-muted">Textos do topo e da seção "quem somos" da sua home.</p>
+                        </div>
+                        <div>
+                            <label htmlFor="biz-hometitle" className={LABEL}>Título do topo da home</label>
+                            <input id="biz-hometitle" type="text" value={biz.homeTitle || ''} onChange={e => patchBiz({ homeTitle: e.target.value })} className={FIELD} placeholder="Aluguel de andaime em São Paulo, com entrega e montagem" />
+                        </div>
+                        <div>
+                            <label htmlFor="biz-homesub" className={LABEL}>Subtítulo do topo da home</label>
+                            <input id="biz-homesub" type="text" value={biz.homeSubtitle || ''} onChange={e => patchBiz({ homeSubtitle: e.target.value })} className={FIELD} placeholder="Andaimes certificados para obras e fachadas. Orçamento rápido." />
+                        </div>
+                        <div>
+                            <label htmlFor="biz-abouttitle" className={LABEL}>Título do "Quem somos"</label>
+                            <input id="biz-abouttitle" type="text" value={biz.aboutTitle || ''} onChange={e => patchBiz({ aboutTitle: e.target.value })} className={FIELD} placeholder="Quem somos" />
+                        </div>
+                        <div>
+                            <label htmlFor="biz-abouttext" className={LABEL}>Texto do "Quem somos"</label>
+                            <textarea id="biz-abouttext" rows={5} value={biz.aboutText || ''} onChange={e => patchBiz({ aboutText: e.target.value })} className={FIELD + ' resize-y'} placeholder="Conte em 1 ou 2 parágrafos quem é a empresa, o que faz e o diferencial." />
+                            <p className="text-[10px] text-ink-faint mt-1.5">Separe parágrafos com uma linha em branco.</p>
+                        </div>
                     </section>
 
                     {/* Modelo de página */}

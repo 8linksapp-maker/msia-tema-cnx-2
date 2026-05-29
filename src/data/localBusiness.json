@@ -2,5 +2,12 @@
   "companyName": "Andaimes SP",
   "phone": "(11) 4000-0000",
   "whatsapp": "5511940000000",
-  "whatsappMessage": "Olá! Vim pelo site e gostaria de um orçamento."
+  "whatsappMessage": "Olá! Vim pelo site e gostaria de um orçamento.",
+  "address": "Av. Exemplo, 1000 - Moema, São Paulo - SP",
+  "hours": "Seg a Sex: 8h às 18h · Sáb: 8h às 12h",
+  "mapEmbed": "",
+  "homeTitle": "Aluguel de andaime em São Paulo, com entrega e montagem",
+  "homeSubtitle": "Andaimes metálicos certificados para obras e fachadas. Orçamento rápido, sem compromisso.",
+  "aboutTitle": "Quem somos",
+  "aboutText": "A Andaimes SP é especializada em locação de andaimes para obras e reformas na região de São Paulo. Trabalhamos com equipamentos revisados e dentro da norma, com entrega e montagem em toda a cidade.\n\nNosso foco é atendimento rápido e preço justo: você pede o orçamento, a gente leva o andaime até a obra e cuida da montagem."
 }

@@ -61,12 +61,23 @@ export interface LocalTemplate {
   metaDescription?: string;
 }
 
-/** Dados da empresa que alimentam as variáveis {empresa}/{telefone} e os CTAs. */
+/** Dados da empresa que alimentam as variáveis {empresa}/{telefone}, os CTAs e a home. */
 export interface LocalBusiness {
   companyName: string;
   phone?: string;
   whatsapp?: string;
   whatsappMessage?: string;
+  /** Bloco de contato/mapa da home. */
+  address?: string;
+  hours?: string;
+  /** URL de embed do Google Maps (ou o <iframe> colado — extraímos o src). */
+  mapEmbed?: string;
+  /** Hero da home. */
+  homeTitle?: string;
+  homeSubtitle?: string;
+  /** Seção "Quem somos" da home (parágrafos separados por linha em branco). */
+  aboutTitle?: string;
+  aboutText?: string;
 }
 
 /** Variáveis disponíveis para substituição no conteúdo/template. */
