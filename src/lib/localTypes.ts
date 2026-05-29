@@ -75,6 +75,9 @@ export interface LocalBusiness {
   /** Hero da home. */
   homeTitle?: string;
   homeSubtitle?: string;
+  /** Imagem de fundo do hero (URL/caminho). Vazio → hero drenado na cor do nicho.
+   *  Upload pelo admin = Francis; a home já renderiza com overlay quando preenchido. */
+  heroImage?: string;
   /** Seção "Quem somos" da home (parágrafos separados por linha em branco). */
   aboutTitle?: string;
   aboutText?: string;
@@ -88,4 +91,48 @@ export interface TemplateVars {
   servico: string;
   empresa: string;
   telefone: string;
+}
+
+/** Um passo da seção "Como funciona" da home. */
+export interface HomeStep {
+  title: string;
+  description: string;
+}
+
+/** Rótulo de seção da home (eyebrow + título), editável no admin. */
+export interface SectionLabel {
+  eyebrow?: string;
+  title?: string;
+}
+
+/**
+ * Conteúdo editável das SEÇÕES da home (src/data/localHome.json).
+ *
+ * Hero e "quem somos" continuam em LocalBusiness (homeTitle/aboutText/heroImage) —
+ * compartilhados/owned na identidade. Aqui ficam só os blocos próprios da home:
+ * provas de confiança, passos, CTA final, rótulos de seção e os toggles show.*.
+ * Textos aceitam variáveis {cidade}/{empresa}/{servico}/... resolvidas pra
+ * localidade principal em build-time.
+ */
+export interface LocalHome {
+  trust?: string[];
+  steps?: HomeStep[];
+  ctaTitle?: string;
+  ctaSubtitle?: string;
+  sections?: {
+    servicos?: SectionLabel;
+    comoFunciona?: SectionLabel;
+    ondeAtendemos?: SectionLabel;
+    contato?: SectionLabel;
+  };
+  /** Liga/desliga cada seção. undefined = visível (default true). */
+  show?: {
+    trust?: boolean;
+    benefits?: boolean;
+    comoFunciona?: boolean;
+    quemSomos?: boolean;
+    ondeAtendemos?: boolean;
+    contato?: boolean;
+    ctaFinal?: boolean;
+  };
 }

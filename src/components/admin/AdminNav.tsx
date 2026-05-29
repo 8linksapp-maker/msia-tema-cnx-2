@@ -3,7 +3,7 @@ import {
     FileText, Tag, Users, Info, Phone,
     Shield, Settings, LogOut, ExternalLink, Navigation,
     Package, FileArchive, PenLine, ChevronRight, Home, Sparkles,
-    Layers, Wrench, MapPin, LayoutGrid, FileType,
+    Layers, Wrench, MapPin, LayoutGrid, FileType, LayoutTemplate,
 } from 'lucide-react';
 
 interface NavItem {
@@ -17,6 +17,7 @@ const contentSections = ['posts', 'categories', 'authors'];
 
 // Site Local — gerador de páginas de SEO (cidade × serviço). Itens adicionados por fatia.
 const localItems: NavItem[] = [
+    { label: 'Página inicial', href: '/admin/local/home', icon: LayoutTemplate, section: 'local-home' },
     { label: 'Nichos', href: '/admin/local/niches', icon: Layers, section: 'local-niches' },
     { label: 'Serviços', href: '/admin/local/services', icon: Wrench, section: 'local-services' },
     { label: 'Localidades', href: '/admin/local/locations', icon: MapPin, section: 'local-locations' },
