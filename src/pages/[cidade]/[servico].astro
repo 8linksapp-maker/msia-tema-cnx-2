@@ -15,6 +15,7 @@ import { marked } from 'marked';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readData } from '../../lib/readData';
 import { applyTemplateVars, buildTemplateVars } from '../../lib/localVars';
+import { extractFaq, removeFaqFromContent } from '../../lib/localFaq';
 import type { Niche, Service, Location, LocalTemplate, LocalBusiness } from '../../lib/localTypes';
 
 export async function getStaticPaths() {
@@ -49,8 +50,12 @@ const vars = buildTemplateVars(loc, svc, biz);
 const rawContent = svc.generatedContent?.trim() || tpl.pageContent || '';
 const content = applyTemplateVars(rawContent, vars);
 
+// FAQ extraída pro acordeão + JSON-LD; removida do corpo pra não duplicar.
+const faqItems = extractFaq(content);
+const contentNoFaq = removeFaqFromContent(content);
+
 marked.setOptions({ gfm: true, breaks: true });
-const contentHtml = content ? String(marked.parse(content)) : '';
+const contentHtml = contentNoFaq ? String(marked.parse(contentNoFaq)) : '';
 
 const heroTitle = applyTemplateVars(tpl.heroTitle || '{servico} em {cidade} - {estado}', vars);
 const heroSubtitle = applyTemplateVars(tpl.heroSubtitle || '', vars);
@@ -77,6 +82,27 @@ const waUrl = waNumber ? `https://wa.me/${waNumber}?text=${waText}` : '';
 const phoneHref = biz.phone ? `tel:${biz.phone.replace(/[^\d+]/g, '')}` : '';
 
 const heroStyle = `--niche: ${nicheColor};`;
+
+// JSON-LD — só URLs que existem de verdade (não há índice por cidade).
+const origin = (Astro.site ?? new URL(Astro.url.origin)).toString().replace(/\/$/, '');
+const pageUrl = `${origin}/${loc.slug}/${svc.slug}`;
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: `${origin}/` },
+    { '@type': 'ListItem', position: 2, name: `${svc.title} em ${loc.name}`, item: pageUrl },
+  ],
+};
+const faqSchema = faqItems.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+} : null;
 ---
 
 <BaseLayout title={metaTitle} description={metaDescription} type="article">
@@ -176,6 +202,27 @@ const heroStyle = `--niche: ${nicheColor};`;
           </div>
         </aside>
       </div>
+
+      {faqItems.length > 0 && (
+        <section class="mt-12 md:mt-16 border-t border-rule pt-10 lg:max-w-[68ch]">
+          <h2 class="font-display text-2xl mb-1">Perguntas frequentes</h2>
+          <p class="text-ink-faint text-sm mb-6">Dúvidas sobre {svc.title} em {loc.name}</p>
+          <div class="divide-y divide-border border border-border rounded-md">
+            {faqItems.map((f) => (
+              <details class="group">
+                <summary class="flex items-center justify-between gap-4 px-4 py-4 cursor-pointer font-semibold text-ink list-none [&::-webkit-details-marker]:hidden">
+                  <span>{f.q}</span>
+                  <svg class="w-4 h-4 text-ink-faint shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9" /></svg>
+                </summary>
+                <p class="px-4 pb-4 text-ink-muted leading-relaxed">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   </article>
 </BaseLayout>
