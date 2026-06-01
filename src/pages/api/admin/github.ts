@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import fs from 'node:fs/promises';
 import nodePath from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readGithubEnv } from '../../../lib/serverEnv';
 
 export const prerender = false;
 
@@ -128,12 +129,23 @@ export const POST: APIRoute = async ({ request }) => {
         const body = await request.json();
         const { action, path, content, message, sha, isBase64 } = body;
 
-        const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
-        const GITHUB_OWNER = import.meta.env.GITHUB_OWNER;
-        const GITHUB_REPO = import.meta.env.GITHUB_REPO;
+        const { token: GITHUB_TOKEN, owner: GITHUB_OWNER, repo: GITHUB_REPO } = readGithubEnv();
 
-        // Modo dev: sem credenciais GitHub → usa filesystem local
         if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
+            // Em produção, faltar credencial é erro de CONFIGURAÇÃO — falha alto
+            // em vez de cair mudo no modo dev (filesystem) e cuspir "Arquivo não
+            // encontrado", que esconde a causa real.
+            if (import.meta.env.PROD) {
+                const missing = [
+                    !GITHUB_TOKEN && 'GITHUB_TOKEN',
+                    !GITHUB_OWNER && 'GITHUB_OWNER',
+                    !GITHUB_REPO && 'GITHUB_REPO',
+                ].filter(Boolean).join(', ');
+                return new Response(JSON.stringify({
+                    error: `Backend GitHub não configurado neste deploy. Faltam: ${missing}. Configure no projeto da Vercel (Settings → Environment Variables, target Production) e refaça o deploy.`,
+                }), { status: 503, headers: { 'Content-Type': 'application/json' } });
+            }
+            // Dev local: sem credenciais GitHub → usa filesystem local
             if (!action || !path) return new Response(JSON.stringify({ error: 'Faltam parâmetros (action, path)' }), { status: 400 });
             return handleDev(action, path, content, isBase64);
         }

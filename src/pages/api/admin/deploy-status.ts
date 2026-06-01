@@ -6,14 +6,13 @@
  */
 
 import type { APIRoute } from 'astro';
+import { readGithubEnv } from '../../../lib/serverEnv';
 
 export const prerender = false;
 
 export const GET: APIRoute = async () => {
     try {
-        const token = (import.meta.env.GITHUB_TOKEN ?? '').trim();
-        const owner = (import.meta.env.GITHUB_OWNER ?? '').trim();
-        const repo  = (import.meta.env.GITHUB_REPO ?? '').trim();
+        const { token, owner, repo } = readGithubEnv();
 
         if (!token || !owner || !repo) {
             return new Response(JSON.stringify({ state: 'idle' }), {

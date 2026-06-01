@@ -9,6 +9,7 @@
  * rate limit do GitHub a cada page load do dashboard.
  */
 import type { APIRoute } from 'astro';
+import { readGithubEnv } from '../../../lib/serverEnv';
 
 export const prerender = false;
 
@@ -19,9 +20,7 @@ export const GET: APIRoute = async () => {
     const json = (data: unknown) =>
         new Response(JSON.stringify(data), { status: 200, headers: { 'Content-Type': 'application/json' } });
 
-    const token = (import.meta.env.GITHUB_TOKEN ?? '').trim();
-    const owner = (import.meta.env.GITHUB_OWNER ?? '').trim();
-    const repo = (import.meta.env.GITHUB_REPO ?? '').trim();
+    const { token, owner, repo } = readGithubEnv();
 
     // Dev / sem credenciais → não há repo remoto pra checar
     if (!token || !owner || !repo) return json({ configured: false, private: null });

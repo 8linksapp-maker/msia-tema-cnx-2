@@ -7,6 +7,7 @@
 import fs from 'node:fs/promises';
 import nodePath from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readGithubEnv } from './serverEnv';
 
 const PROJECT_ROOT = nodePath.resolve(fileURLToPath(import.meta.url), '../../../');
 
@@ -20,9 +21,7 @@ export interface AtomicFile {
 }
 
 function ghEnv() {
-  const token = import.meta.env.GITHUB_TOKEN;
-  const owner = import.meta.env.GITHUB_OWNER;
-  const repo = import.meta.env.GITHUB_REPO;
+  const { token, owner, repo } = readGithubEnv();
   if (!token || !owner || !repo) return null;
   return { token, owner, repo,
     headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' } };

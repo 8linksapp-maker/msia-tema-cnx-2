@@ -7,6 +7,7 @@
 
 import type { APIRoute } from 'astro';
 import { validateSession } from '../../../lib/auth';
+import { readGithubEnv, readDeployHookUrl } from '../../../lib/serverEnv';
 
 export const prerender = false;
 
@@ -32,10 +33,8 @@ export const GET: APIRoute = async ({ request }) => {
         return new Response(JSON.stringify({ error: 'Não autorizado' }), { status: 401 });
     }
 
-    const token = (import.meta.env.GITHUB_TOKEN ?? '').trim();
-    const owner = (import.meta.env.GITHUB_OWNER ?? '').trim();
-    const repo = (import.meta.env.GITHUB_REPO ?? '').trim();
-    const hookConfigured = Boolean((import.meta.env.DEPLOY_HOOK_URL ?? '').trim());
+    const { token, owner, repo } = readGithubEnv();
+    const hookConfigured = Boolean(readDeployHookUrl());
 
     if (!token || !owner || !repo) {
         return new Response(JSON.stringify({
@@ -115,7 +114,7 @@ export const POST: APIRoute = async ({ request }) => {
         return new Response(JSON.stringify({ error: 'Não autorizado' }), { status: 401 });
     }
 
-    const hookUrl = (import.meta.env.DEPLOY_HOOK_URL ?? '').trim();
+    const hookUrl = readDeployHookUrl();
     if (!hookUrl) {
         return new Response(JSON.stringify({ error: 'Deploy Hook não configurado. Contate o suporte.' }), { status: 500 });
     }
