@@ -6,15 +6,15 @@
         },
         {
             "label": "Serviços",
-            "href": "/#servicos"
+            "href": "/servicos"
         },
         {
             "label": "Quem somos",
-            "href": "/#quem-somos"
+            "href": "/quem-somos"
         },
         {
             "label": "Contato",
-            "href": "/#contato"
+            "href": "/contato"
         },
         {
             "label": "Blog",

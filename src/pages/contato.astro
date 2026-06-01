@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { readData } from '../lib/readData';
+import { loadContactPage } from '../lib/localPagesData';
 
 const siteConfig = readData('siteConfig.json');
 const contatoData = readData('contato.json', {});
-const contact = siteConfig.contact || {};
+const { biz, waUrl, phoneHref } = loadContactPage();
 ---
 
 <BaseLayout title="Contato" description={`Fale com ${siteConfig.name}`}>
@@ -15,7 +16,7 @@ const contact = siteConfig.contact || {};
         Vamos conversar.
       </h1>
       <p class="text-xl text-ink-muted leading-relaxed max-w-2xl">
-        {(contatoData as any).intro || 'Tem ideia, parceria ou dúvida? Manda mensagem que respondemos.'}
+        {(contatoData as any).intro || 'Peça seu orçamento ou tire suas dúvidas. A gente responde rápido.'}
       </p>
     </div>
   </section>
@@ -23,22 +24,28 @@ const contact = siteConfig.contact || {};
   <div class="container-x py-14 md:py-20">
     <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 md:gap-20">
       <div class="space-y-8">
-        {contact.email && (
-          <div>
-            <div class="mono uppercase text-ink-faint mb-2">email</div>
-            <a href={`mailto:${contact.email}`} class="text-lg font-medium text-ink hover:text-primary transition-colors">{contact.email}</a>
-          </div>
-        )}
-        {contact.phone && (
+        {biz.phone && (
           <div>
             <div class="mono uppercase text-ink-faint mb-2">telefone</div>
-            <a href={`tel:${contact.phone.replace(/\D/g, '')}`} class="text-lg font-medium text-ink hover:text-primary transition-colors">{contact.phone}</a>
+            <a href={phoneHref} class="text-lg font-medium text-ink hover:text-primary transition-colors">{biz.phone}</a>
           </div>
         )}
-        {contact.address && (
+        {waUrl && (
+          <div>
+            <div class="mono uppercase text-ink-faint mb-2">whatsapp</div>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" class="text-lg font-medium text-ink hover:text-primary transition-colors">Falar no WhatsApp</a>
+          </div>
+        )}
+        {biz.address && (
           <div>
             <div class="mono uppercase text-ink-faint mb-2">endereço</div>
-            <p class="text-base text-ink leading-relaxed">{contact.address}</p>
+            <p class="text-base text-ink leading-relaxed">{biz.address}</p>
+          </div>
+        )}
+        {biz.hours && (
+          <div>
+            <div class="mono uppercase text-ink-faint mb-2">horário</div>
+            <p class="text-base text-ink leading-relaxed">{biz.hours}</p>
           </div>
         )}
       </div>
