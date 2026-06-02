@@ -24,6 +24,14 @@ const socials: Array<[string, string, string]> = [
   ['github', 'github', siteConfig.social?.github],
   ['pinterest', 'pinterest', siteConfig.social?.pinterest],
 ].filter(([_, __, href]: any) => href) as any;
+
+// Galeria do Instagram (configurada em Configurações). Cada imagem linka pro post
+// (se informado) ou pro perfil do Instagram.
+const igItems = (Array.isArray(siteConfig.instagramFeed) ? siteConfig.instagramFeed : [])
+  .map((i: any) => (typeof i === 'string' ? { src: i, link: '' } : (i || {})))
+  .filter((i: any) => i.src)
+  .slice(0, 6);
+const igProfile = siteConfig.social?.instagram || '';
 ---
 
 <footer class="border-t border-rule mt-24">
@@ -74,6 +82,19 @@ const socials: Array<[string, string, string]> = [
         </div>
       )}
     </div>
+
+    {igItems.length > 0 && (
+      <div class="border-t border-rule pt-10 mb-10">
+        <div class="mono uppercase text-ink-faint mb-4">instagram</div>
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 md:gap-3">
+          {igItems.map((item: any) => (
+            <a href={item.link || igProfile || '#'} target="_blank" rel="noopener" class="block aspect-square overflow-hidden rounded-md bg-elev group" aria-label="Ver no Instagram">
+              <img src={item.src} alt="Instagram" loading="lazy" class="w-full h-full object-cover group-hover:opacity-85 transition-opacity" />
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
 
     <div class="border-t border-rule pt-6 flex items-center justify-between flex-wrap gap-3 text-xs">
       <span class="mono text-ink-faint">© {year} {siteConfig.footer?.copyright || siteConfig.name}</span>
