@@ -22,6 +22,9 @@ export function loadServicesPage() {
     region: d.region,
     waUrl: d.waUrl,
     labels: d.labels.servicos,
+    ctaTitle: d.ctaTitle,
+    ctaSubtitle: d.ctaSubtitle,
+    ctaButton: d.ctaButton,
     empty: d.services.length === 0,
   };
 }
