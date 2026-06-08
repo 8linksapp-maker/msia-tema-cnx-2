@@ -128,6 +128,8 @@ export interface LocalHome {
   steps?: HomeStep[];
   ctaTitle?: string;
   ctaSubtitle?: string;
+  /** Texto do botão de WhatsApp em todos os CTAs do site. Ex.: "Falar no WhatsApp", "Agendar consulta", "Pedir orçamento". */
+  ctaButton?: string;
   sections?: {
     servicos?: SectionLabel;
     comoFunciona?: SectionLabel;
