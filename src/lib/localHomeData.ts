@@ -109,6 +109,7 @@ export function loadHomeData(preview?: HomePreview) {
 
   const ctaTitle = av(home.ctaTitle || (services[0] ? `Precisa de ${services[0].title.toLowerCase()}?` : 'Precisa de um orçamento?'));
   const ctaSubtitle = av(home.ctaSubtitle || 'Fale agora e receba um orçamento sem compromisso.');
+  const ctaButton = av((home as any).ctaButton || 'Falar no WhatsApp');
 
   const embedSrc = mapSrc(biz.mapEmbed);
   const serviceHref = (svc: Service) => (principalLoc ? `/${principalLoc.slug}/${svc.slug}` : '#');
@@ -125,7 +126,7 @@ export function loadHomeData(preview?: HomePreview) {
     heroColor, heroImg, heroInk, heroInitial, accent, accentInk,
     waUrl, phoneHref, biz,
     heroTitle, heroSubtitle, aboutParas,
-    trust, benefits, steps, labels, show, ctaTitle, ctaSubtitle,
+    trust, benefits, steps, labels, show, ctaTitle, ctaSubtitle, ctaButton,
     embedSrc, serviceHref, empty,
   };
 }
