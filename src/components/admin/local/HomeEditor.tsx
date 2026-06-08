@@ -175,7 +175,7 @@ export default function HomeEditor() {
                     <VariableField value={biz.homeSubtitle || ''} onChange={v => patchBiz({ homeSubtitle: v })} vars={vars} placeholder="Andaimes certificados para obras. Orçamento rápido." aria-label="Frase de apoio do topo" />
                 </div>
                 <ImageUploadField value={biz.heroImage || ''} onChange={v => patchBiz({ heroImage: v })} namePrefix="hero"
-                    label="Imagem de fundo" hint="Aparece atrás do título no topo. Opcional — sem imagem, o topo fica na cor do site." />
+                    label="Imagem de fundo" hint="Tamanho ideal: 1920×1080px (horizontal, widescreen). Aparece atrás do título no topo, cobre 100% da largura. Sem imagem, o topo fica na cor do site." />
             </section>
 
             {/* PROVAS */}
@@ -319,6 +319,11 @@ export default function HomeEditor() {
                 <div>
                     <label className={LABEL}>Subtítulo</label>
                     <VariableField value={home.ctaSubtitle || ''} onChange={v => patch({ ctaSubtitle: v })} vars={vars} placeholder="Fale agora e receba um orçamento sem compromisso." aria-label="Subtítulo da faixa final" />
+                </div>
+                <div>
+                    <label htmlFor="cta-button" className={LABEL}>Texto do botão</label>
+                    <input id="cta-button" type="text" value={(home as any).ctaButton || ''} onChange={e => patch({ ctaButton: e.target.value } as any)} className={FIELD} placeholder="Falar no WhatsApp" />
+                    <p className="text-xs text-ink-faint mt-1">Usado em todos os botões de WhatsApp do site (home, /servicos, cards). Ex.: "Agendar consulta", "Pedir orçamento", "Conversar agora".</p>
                 </div>
             </section>
 
