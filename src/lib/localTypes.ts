@@ -130,6 +130,12 @@ export interface LocalHome {
   ctaSubtitle?: string;
   /** Texto do botão de WhatsApp em todos os CTAs do site. Ex.: "Falar no WhatsApp", "Agendar consulta", "Pedir orçamento". */
   ctaButton?: string;
+  /** Camada escura sobre a imagem do hero (pra título branco ficar legível em foto clara).
+   *  enabled: undefined = ativo (default true). opacity: 0-100 (default 77). Sem imagem de hero, é ignorado. */
+  heroOverlay?: {
+    enabled?: boolean;
+    opacity?: number;
+  };
   sections?: {
     servicos?: SectionLabel;
     comoFunciona?: SectionLabel;
