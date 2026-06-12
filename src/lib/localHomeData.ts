@@ -121,9 +121,18 @@ export function loadHomeData(preview?: HomePreview) {
     .filter(Boolean) as Service[];
   const homeServices = (featured.length ? featured : services).slice(0, 9);
 
+  // Camada escura sobre a imagem do hero (default ativa, 77% — suficiente pra texto branco grande).
+  // Aluno pode desligar (foto clara, quer foto visível) ou reduzir intensidade no admin.
+  const heroOverlay = {
+    enabled: home.heroOverlay?.enabled !== false,
+    opacity: typeof home.heroOverlay?.opacity === 'number'
+      ? Math.max(0, Math.min(100, home.heroOverlay.opacity))
+      : 77,
+  };
+
   return {
     services, homeServices, builtLocations, principalLoc, cities, region, niches, nicheOf, company,
-    heroColor, heroImg, heroInk, heroInitial, accent, accentInk,
+    heroColor, heroImg, heroInk, heroInitial, accent, accentInk, heroOverlay,
     waUrl, phoneHref, biz,
     heroTitle, heroSubtitle, aboutParas,
     trust, benefits, steps, labels, show, ctaTitle, ctaSubtitle, ctaButton,
