@@ -176,6 +176,55 @@ export default function HomeEditor() {
                 </div>
                 <ImageUploadField value={biz.heroImage || ''} onChange={v => patchBiz({ heroImage: v })} namePrefix="hero"
                     label="Imagem de fundo" hint="Tamanho ideal: 1920×1080px (horizontal, widescreen). Aparece atrás do título no topo, cobre 100% da largura. Sem imagem, o topo fica na cor do site." />
+                {biz.heroImage && (() => {
+                    const ov = home.heroOverlay || {};
+                    const enabled = ov.enabled !== false;
+                    const opacity = typeof ov.opacity === 'number' ? Math.max(0, Math.min(100, ov.opacity)) : 77;
+                    return (
+                        <div className="border-t border-border pt-4 space-y-3">
+                            <label className="flex items-start gap-3 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={enabled}
+                                    onChange={e => patch({ heroOverlay: { ...ov, enabled: e.target.checked } })}
+                                    className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30"
+                                />
+                                <div>
+                                    <div className="text-sm font-semibold text-ink">Escurecer a imagem de fundo</div>
+                                    <div className="text-[11px] text-ink-faint mt-0.5 leading-relaxed">
+                                        Aplica uma camada escura sobre a foto pro título branco ficar legível.
+                                        Desligue se sua foto já tem contraste suficiente (céu, parede clara com texto escuro, etc.).
+                                    </div>
+                                </div>
+                            </label>
+                            {enabled && (
+                                <div className="pl-7 space-y-2">
+                                    <div className="flex items-center justify-between">
+                                        <label htmlFor="hero-overlay-opacity" className="text-[11px] font-bold text-ink-muted uppercase tracking-widest">
+                                            Intensidade do escurecimento
+                                        </label>
+                                        <span className="text-xs font-mono text-ink-muted tabular-nums">{opacity}%</span>
+                                    </div>
+                                    <input
+                                        id="hero-overlay-opacity"
+                                        type="range"
+                                        min={0}
+                                        max={100}
+                                        step={1}
+                                        value={opacity}
+                                        onChange={e => patch({ heroOverlay: { ...ov, opacity: parseInt(e.target.value, 10) } })}
+                                        className="w-full accent-primary"
+                                    />
+                                    <div className="text-[10px] text-ink-faint flex justify-between">
+                                        <span>0% — foto pura</span>
+                                        <span>77% — padrão</span>
+                                        <span>100% — bem escura</span>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })()}
             </section>
 
             {/* PROVAS */}
