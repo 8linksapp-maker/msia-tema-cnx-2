@@ -67,8 +67,21 @@ const {
 } = Astro.props;
 
 const formattedTitle = title === defaultTitle ? title : `${title} | ${siteConfig.name}`;
-const siteUrl = siteConfig.url || Astro.url.origin;
-const socialImage = image?.startsWith('http') ? image : image ? new URL(image, siteUrl).toString() : '';
+// Normaliza a base: domínio salvo no admin pode vir sem protocolo (ex.: "exemplo.com.br").
+// new URL() exige base absoluta — sem isso o build quebra com "Invalid URL" (BUILD-05).
+const rawSiteUrl = (siteConfig.url || Astro.url.origin || '').trim();
+const siteUrl = rawSiteUrl && !/^https?:\/\//i.test(rawSiteUrl) ? `https://${rawSiteUrl}` : rawSiteUrl;
+// Nenhum new URL com base de dado do usuário pode derrubar o build → try/catch com fallback seguro.
+function toAbsoluteUrl(path: string, base: string): string {
+  if (!path) return '';
+  if (/^https?:\/\//i.test(path)) return path;
+  try {
+    return new URL(path, base).toString();
+  } catch {
+    return path; // fallback: path relativo (não derruba o build)
+  }
+}
+const socialImage = toAbsoluteUrl(image, siteUrl);
 ---
 
 <!DOCTYPE html>
