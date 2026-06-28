@@ -93,6 +93,13 @@ const socialImage = toAbsoluteUrl(image, siteUrl);
   <meta name="description" content={description} />
   <link rel="icon" href={siteConfig.favicon || '/favicon.svg'} />
   {font.href && <link rel="stylesheet" href={font.href} />}
+  {/* Tema default (Fraunces/Karla self-hosted): preload do display + body acima da dobra */}
+  {!font.href && (
+    <>
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-var-latin.woff2" crossorigin />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/karla-400.woff2" crossorigin />
+    </>
+  )}
 
   {gscVerificationTag && (
     gscVerificationTag.startsWith('<')
